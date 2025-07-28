@@ -1,0 +1,13 @@
+# Exclude files larger than 100MB
+data/Amazon-Baby_Products/ratings.csv
+data/Amazon-Software/ratings.csv
+data/Amazon-Toys_and_Games/ratings.csv
+data/Amazon-Video_Games/ratings.csv
+
+cppcode/.rendered*
+cppcode/*.cpython*
+lgcn_graph
+log/*
+model/*
+
+**/__pycache__/*

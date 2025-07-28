@@ -1,0 +1,52 @@
+// Number of users: 16939, Number of items: 10457, Total interactions: 1203025
+#define item_num 10457
+#define user_num 16939
+const char *dataset_path = "./data/Douban-book/";
+
+/*
+<%
+setup_pybind11(cfg)
+%>
+*/
+#ifdef _MSC_VER
+#pragma warning(disable : 4996)
+#endif
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+// #include<iostream>
+#include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
+
+#define _CRT_SECURE_NO_WARNINGS
+
+namespace py = pybind11;
+
+#include "common.cpp"
+#include "common.h"
+
+double *item_popularity[item_num];
+double *item_rating[item_num];
+double *item_ave_rating[item_num];
+double *grad[item_num];
+int *item_interaction[item_num]; //[itemid][[timestamp]]
+int *user_interaction[user_num];
+
+int idx, i, itr_num_item, j, itemid;
+int timestamp;
+double all_average_rating;
+int interaction_num[item_num] = {0}; // すべてのアイテムのインタラクション数のみを保存する
+int interaction_num_user[user_num] = {0};
+double tau[item_num] = {10000000}; // 8000000;
+double tmp = 0;
+
+PYBIND11_MODULE(pybind_douban_book, m)
+{
+
+  m.doc() = "pybind11 example module";
+
+  define_pybind_functions(m);
+}
